@@ -12,7 +12,7 @@ const staggerContainer = (staggerChildren, delayChildren) => {
   };
 };
 
-const SectionWrapper = (Component, idName) =>
+const SectionWrapper = (Component, idName, extraClasses = "") =>
   function HOC() {
     return (
       <motion.section
@@ -20,10 +20,10 @@ const SectionWrapper = (Component, idName) =>
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.25 }}
-        className={`relative z-0 container mx-auto py-10 md:py-16 px-4 sm:px-8`}
+        className={`relative z-0 container mx-auto py-10 md:py-16 px-4 sm:px-8 ${extraClasses}`}
       >
         <span className='hash-span' id={idName}>
-          &nbsp;
+           
         </span>
         <Component />
       </motion.section>
