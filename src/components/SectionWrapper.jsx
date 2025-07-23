@@ -13,7 +13,7 @@ const staggerContainer = (staggerChildren, delayChildren) => {
 };
 
 const SectionWrapper = (Component, idName, extraClasses = "") =>
-  function HOC() {
+  function HOC(props) {
     return (
       <motion.section
         variants={staggerContainer()}
@@ -25,7 +25,7 @@ const SectionWrapper = (Component, idName, extraClasses = "") =>
         <span className='hash-span' id={idName}>
            
         </span>
-        <Component />
+        <Component {...props} />
       </motion.section>
     );
   };
