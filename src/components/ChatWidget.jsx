@@ -57,14 +57,14 @@ const ChatWidget = () => {
       <div className="fixed bottom-5 right-5 z-[999]">
         <button onClick={() => setIsOpen(!isOpen)} className="chat-toggle w-16 h-16 bg-accent rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
           {isOpen ? (
-            <FaTimes className="text-dark-bg text-2xl" />
+            <FaTimes className="text-background text-2xl" />
           ) : (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="7" r="2" fill="#111827" />
-                <circle cx="7" cy="12" r="2" fill="#111827" />
-                <circle cx="17" cy="12" r="2" fill="#111827" />
-                <circle cx="12" cy="17" r="2" fill="#111827" />
-                <path d="M12 7 L 7 12 M12 7 L 17 12 M7 12 L 12 17 M17 12 L 12 17" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-background">
+                <circle cx="12" cy="7" r="2" fill="currentColor" />
+                <circle cx="7" cy="12" r="2" fill="currentColor" />
+                <circle cx="17" cy="12" r="2" fill="currentColor" />
+                <circle cx="12" cy="17" r="2" fill="currentColor" />
+                <path d="M12 7 L 7 12 M12 7 L 17 12 M7 12 L 12 17 M17 12 L 12 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
         </button>

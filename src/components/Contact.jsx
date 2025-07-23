@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import SectionWrapper from './SectionWrapper';
 
-const Notification = ({ message, type, onClose }) => {
+const Notification = ({ message, type }) => {
   if (!message) return null;
-  const bgColor = type === 'success' ? 'bg-accent' : 'bg-red-500';
-  const textColor = type === 'success' ? 'text-dark-bg' : 'text-white';
+  const successStyles = 'bg-accent text-background';
+  const errorStyles = 'bg-red-500 text-white';
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className={`fixed top-24 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-lg ${bgColor} ${textColor} font-semibold z-50`}
+      className={`fixed top-24 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-lg font-semibold z-50 ${type === 'success' ? successStyles : errorStyles}`}
     >
       {message}
     </motion.div>
@@ -43,12 +43,7 @@ const Contact = () => {
     setStatus('sending');
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwOnpojIrcb8FSlxQcswDYuRqTQ1qMGfyBZEsL72OCf9Bh23MF0d9Hex4PoF7WRAC_0/exec';
 
-    fetch(scriptURL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    })
+    fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
     .then(() => {
       setStatus('success');
       showNotification('Pesan berhasil dikirim!', 'success');
@@ -64,33 +59,42 @@ const Contact = () => {
   };
 
   return (
-    <SectionWrapper id="contact" className="py-20 md:py-24">
+    <SectionWrapper id="contact">
       <div className="container mx-auto px-4">
-        <Notification message={notification.message} type={notification.type} />
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-12 text-white">Hubungi Saya</h2>
+        <AnimatePresence>
+          {notification.message && <Notification message={notification.message} type={notification.type} />}
+        </AnimatePresence>
+        <h2 className="section-title">Hubungi Saya</h2>
         <motion.div 
-          className="max-w-lg mx-auto"
+          className="max-w-2xl mx-auto card"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
         >
+          <p className="text-center text-text-secondary mb-8">
+            Punya pertanyaan atau ingin berkolaborasi? Jangan ragu untuk mengirim pesan.
+          </p>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300">Nama</label>
-              <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="mt-1 block w-full p-3 bg-dark-secondary text-text-light border border-gray-700 rounded-md focus:border-accent focus:ring focus:ring-accent/30 transition-colors" />
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-text-secondary mb-2">Nama</label>
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="input-field" placeholder="Nama Anda" />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-2">Email</label>
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="input-field" placeholder="Email Anda" />
+              </div>
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email</label>
-              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="mt-1 block w-full p-3 bg-dark-secondary text-text-light border border-gray-700 rounded-md focus:border-accent focus:ring focus:ring-accent/30 transition-colors" />
+              <label htmlFor="message" className="block text-sm font-medium text-text-secondary mb-2">Pesan</label>
+              <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange} required className="input-field" placeholder="Pesan Anda..."></textarea>
             </div>
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300">Pesan</label>
-              <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} required className="mt-1 block w-full p-3 bg-dark-secondary text-text-light border border-gray-700 rounded-md focus:border-accent focus:ring focus:ring-accent/30 transition-colors"></textarea>
+            <div className="text-center">
+              <button type="submit" disabled={status === 'sending'} className="btn-primary w-full md:w-auto disabled:bg-slate-500 disabled:shadow-none disabled:cursor-not-allowed">
+                {status === 'sending' ? 'Mengirim...' : 'Kirim Pesan'}
+              </button>
             </div>
-            <button type="submit" disabled={status === 'sending'} className="w-full bg-accent hover:bg-accent-dark text-dark-bg font-bold py-3 rounded-md transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed">
-              {status === 'sending' ? 'Mengirim...' : 'Kirim Pesan'}
-            </button>
           </form>
         </motion.div>
       </div>

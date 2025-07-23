@@ -8,12 +8,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#111827',
-        'dark-secondary': '#1f2937',
-        'text-light': '#f0fdfa',
-        'text-gray': '#9ca3af',
-        'accent': '#2dd4bf',
-        'accent-dark': '#0d9488'
+        background: '#0f172a',
+        'background-secondary': '#1e293b',
+        'text-primary': '#f1f5f9',
+        'text-secondary': '#94a3b8',
+        accent: '#2dd4bf',
+        'accent-hover': '#5eead4',
       },
       fontFamily: {
         serif: ['DM Serif Display', 'serif'],

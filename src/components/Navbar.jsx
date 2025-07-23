@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { href: '#about', text: 'Tentang Saya' },
@@ -15,13 +15,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -33,48 +28,53 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'navbar-scrolled' : ''}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-sm border-b border-slate-700/50' : 'bg-transparent'}`}>
       <div className="container mx-auto flex items-center justify-between p-4">
         <a href="#" className="flex items-center text-2xl font-bold text-accent">
           <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 10 C 18 8, 25 6, 35 10 C 45 14, 48 22, 45 30 C 42 38, 35 44, 25 45 C 20 45.5, 15 44, 12 40 L 18 35" stroke="#2dd4bf" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M20 45 L 40 55" stroke="#2dd4bf" strokeWidth="5" strokeLinecap="round" />
+            <path d="M15 10 C 18 8, 25 6, 35 10 C 45 14, 48 22, 45 30 C 42 38, 35 44, 25 45 C 20 45.5, 15 44, 12 40 L 18 35" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M20 45 L 40 55" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
           </svg>
+          <span className="ml-2 font-sans text-xl font-bold text-text-primary">Reykal</span>
         </a>
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-accent focus:outline-none">
             {isOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
           </button>
         </div>
-        <ul className="hidden md:flex space-x-8 font-sans">
-          {navLinks.map(link => (
-            <li key={link.href}>
-              <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="hover:text-accent transition-colors">
-                {link.text}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-dark-bg/95 backdrop-blur-sm"
-        >
-          <ul className="flex flex-col space-y-4 p-4">
+        <nav className="hidden md:flex">
+          <ul className="flex items-center space-x-8 font-sans text-sm font-medium text-text-secondary">
             {navLinks.map(link => (
               <li key={link.href}>
-                <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="hover:text-accent transition-colors block py-2">
+                <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="hover:text-accent transition-colors">
                   {link.text}
                 </a>
               </li>
             ))}
           </ul>
-        </motion.div>
-      )}
-    </nav>
+        </nav>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background-secondary"
+          >
+            <ul className="flex flex-col p-4">
+              {navLinks.map(link => (
+                <li key={link.href}>
+                  <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="hover:text-accent transition-colors block py-3 text-center text-text-primary">
+                    {link.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

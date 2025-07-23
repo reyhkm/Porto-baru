@@ -12,12 +12,19 @@ import ChatWidget from './components/ChatWidget';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
-    <>
+    <div className="bg-background">
       <Navbar />
       <main>
         <Hero />
@@ -29,8 +36,8 @@ function App() {
       </main>
       <Footer />
       <ChatWidget />
-      <ProjectModal isOpen={isModalOpen} onClose={closeModal} />
-    </>
+      <ProjectModal isOpen={isModalOpen} onClose={closeModal} project={selectedProject} />
+    </div>
   );
 }
 
