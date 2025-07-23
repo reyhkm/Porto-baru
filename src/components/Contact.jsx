@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionWrapper from './SectionWrapper';
 
-const Notification = ({ message, type, on-close }) => {
+const Notification = ({ message, type, onClose }) => {
   if (!message) return null;
   const bgColor = type === 'success' ? 'bg-accent' : 'bg-red-500';
   const textColor = type === 'success' ? 'text-dark-bg' : 'text-white';
