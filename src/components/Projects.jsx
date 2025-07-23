@@ -24,13 +24,13 @@ const ProjectCard = ({ project, onProjectClick, index }) => {
     <motion.div 
       variants={fadeIn("up", "spring", index * 0.5, 0.75)}
       onClick={() => onProjectClick(project)}
-      className="glass-card w-full sm:w-[360px] cursor-pointer"
+      className="glass-card w-full sm:w-[360px] cursor-pointer group"
     >
-      <div className='relative w-full h-[230px]'>
+      <div className='relative w-full h-[230px] overflow-hidden rounded-2xl'>
         <img
           src={project.image}
           alt={project.title}
-          className='w-full h-full object-cover rounded-2xl'
+          className='w-full h-full object-cover rounded-2xl transition-transform duration-300 group-hover:scale-105'
         />
       </div>
 
