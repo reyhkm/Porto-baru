@@ -26,13 +26,13 @@ const Contact = () => {
       setStatus('success');
       alert('Pesan berhasil dikirim! Terima kasih.');
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 2000);
+      setTimeout(() => setStatus('idle'), 3000);
     })
     .catch((error) => {
       console.error('Error!', error.message);
       setStatus('error');
       alert('Terjadi kesalahan, pesan tidak terkirim.');
-      setTimeout(() => setStatus('idle'), 2000);
+      setTimeout(() => setStatus('idle'), 3000);
     });
   };
 
@@ -49,49 +49,58 @@ const Contact = () => {
           onSubmit={handleSubmit}
           className='mt-12 flex flex-col gap-8'
         >
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Nama Anda</span>
+          <div className="relative">
             <input
               type='text'
               name='name'
+              id='name'
               value={formData.name}
               onChange={handleChange}
-              placeholder="Siapa nama Anda?"
-              className='input-field'
+              className='input-field peer'
+              placeholder=" "
               required
             />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Email Anda</span>
+            <label htmlFor='name' className='absolute text-sm text-text-secondary duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-background-secondary px-2 peer-focus:px-2 peer-focus:text-accent peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1'>
+              Nama Anda
+            </label>
+          </div>
+          <div className="relative">
             <input
               type='email'
               name='email'
+              id='email'
               value={formData.email}
               onChange={handleChange}
-              placeholder="Apa alamat email Anda?"
-              className='input-field'
+              className='input-field peer'
+              placeholder=" "
               required
             />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Pesan Anda</span>
+            <label htmlFor='email' className='absolute text-sm text-text-secondary duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-background-secondary px-2 peer-focus:px-2 peer-focus:text-accent peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1'>
+              Email Anda
+            </label>
+          </div>
+          <div className="relative">
             <textarea
               rows={7}
               name='message'
+              id='message'
               value={formData.message}
               onChange={handleChange}
-              placeholder='Apa yang ingin Anda sampaikan?'
-              className='input-field'
+              className='input-field peer'
+              placeholder=' '
               required
             />
-          </label>
+            <label htmlFor='message' className='absolute text-sm text-text-secondary duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-background-secondary px-2 peer-focus:px-2 peer-focus:text-accent peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-6 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1'>
+              Pesan Anda
+            </label>
+          </div>
 
           <button
             type='submit'
             className='btn-primary py-3 px-8 rounded-xl outline-none w-fit font-bold shadow-md'
-            disabled={status === 'sending'}
+            disabled={status === 'sending' || status === 'success'}
           >
-            {status === 'sending' ? "Mengirim..." : "Kirim"}
+            {status === 'sending' ? "Mengirim..." : status === 'success' ? "Terkirim!" : "Kirim"}
           </button>
         </form>
       </motion.div>

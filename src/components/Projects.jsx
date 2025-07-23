@@ -24,7 +24,7 @@ const Projects = ({ onProjectClick }) => {
       <h2 className="section-title text-center mb-12">Proyek Unggulan</h2>
       <div className="max-w-4xl mx-auto">
         <motion.div
-          className="group grid md:grid-cols-2 gap-8 items-center card hover:border-accent/50 cursor-pointer p-6 md:p-8"
+          className="group relative grid md:grid-cols-2 gap-0 items-center glass-card overflow-hidden cursor-pointer p-0"
           onClick={() => onProjectClick(projectData)}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -32,18 +32,19 @@ const Projects = ({ onProjectClick }) => {
           transition={{ duration: 0.7 }}
           whileHover={{ y: -5 }}
         >
-          <div className="overflow-hidden rounded-lg">
-            <img src={projectData.image} alt={projectData.title} className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" />
+          <div className="relative overflow-hidden h-full">
+            <img src={projectData.image} alt={projectData.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent md:hidden group-hover:from-black/70 transition-all"></div>
           </div>
-          <div className="text-white">
+          <div className="absolute bottom-0 left-0 p-6 md:p-8 md:static text-white z-10">
             <h3 className="text-2xl font-bold font-serif mb-3 text-text-primary">{projectData.title}</h3>
             <p className="text-base text-text-secondary mb-4">{projectData.description}</p>
             <div className="flex flex-wrap gap-2 mb-6">
               {projectData.tags.map(tag => (
-                <span key={tag} className="px-3 py-1 bg-slate-700 text-accent rounded-full text-xs font-semibold">{tag}</span>
+                <span key={tag} className="px-3 py-1 bg-slate-700/80 backdrop-blur-sm text-accent rounded-full text-xs font-semibold">{tag}</span>
               ))}
             </div>
-            <span className="text-accent font-semibold flex items-center gap-2">
+            <span className="text-accent font-semibold flex items-center gap-2 group-hover:text-white transition-colors">
               Klik untuk detail
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />

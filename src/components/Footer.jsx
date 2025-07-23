@@ -21,9 +21,12 @@ const Footer = () => {
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label={link.name}
-              className="text-2xl hover:text-accent transition-transform duration-300 hover:scale-125"
+              className="group relative text-2xl hover:text-accent transition-transform duration-300 hover:scale-125"
             >
               <link.icon />
+              <span className="absolute bottom-full mb-2 w-auto p-2 text-xs text-white bg-slate-800 rounded-md scale-0 group-hover:scale-100 transition-transform origin-bottom whitespace-nowrap">
+                {link.name}
+              </span>
             </a>
           ))}
         </div>
