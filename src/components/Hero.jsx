@@ -11,10 +11,10 @@ const Hero = () => {
 
         <div>
           <h1 className="text-5xl md:text-7xl font-bold text-text-primary">
-            Halo, saya <span className='text-accent'>Reykal</span>
+            Reykal Al Hikam
           </h1>
           <p className="text-lg md:text-xl text-text-secondary max-w-2xl mt-4 font-sans">
-            Seorang AI Engineer yang bersemangat, mengubah ide menjadi solusi machine learning yang cerdas dan berdampak.
+            <span className="text-accent font-semibold">AI Engineer & Web Developer.</span> Saya merancang dan membangun solusi cerdas berbasis data yang fungsional dan elegan.
           </p>
         </div>
       </div>

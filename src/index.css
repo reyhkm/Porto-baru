@@ -10,10 +10,10 @@
     @apply bg-background text-text-primary font-sans antialiased relative z-0;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif text-text-primary;
+    @apply font-serif text-text-primary tracking-tight;
   }
   p {
-    @apply text-text-secondary;
+    @apply text-text-secondary leading-relaxed;
   }
 }
 
@@ -22,7 +22,7 @@
     @apply text-4xl md:text-5xl font-bold;
   }
   .section-subtitle {
-    @apply text-lg text-text-secondary uppercase tracking-wider mb-2;
+    @apply text-sm font-semibold text-text-secondary uppercase tracking-widest mb-2;
   }
   .btn-primary {
     @apply inline-block bg-accent hover:bg-accent-hover text-background font-bold px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-accent/20 hover:shadow-accent/30;

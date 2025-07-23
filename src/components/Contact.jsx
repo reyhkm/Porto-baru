@@ -42,8 +42,8 @@ const Contact = () => {
         variants={slideIn('left', 'tween', 0.2, 1)}
         className='flex-[0.75] glass-card'
       >
-        <p className="section-subtitle">Hubungi saya</p>
-        <h3 className="section-title">Kontak.</h3>
+        <p className="section-subtitle">Tertarik Bekerja Sama?</p>
+        <h3 className="section-title">Hubungi Saya.</h3>
 
         <form
           onSubmit={handleSubmit}

@@ -61,9 +61,9 @@ const Projects = ({ onProjectClick }) => {
       <div className='w-full flex'>
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className='mt-3 text-text-secondary text-[17px] max-w-3xl leading-[30px]'
+          className='mt-3 text-text-secondary text-[17px] max-w-3xl'
         >
-          Proyek berikut menunjukkan keahlian dan pengalaman saya melalui contoh-contoh nyata dari pekerjaan saya. Setiap proyek dijelaskan secara singkat dengan tautan ke demo langsung. Ini mencerminkan kemampuan saya untuk memecahkan masalah yang kompleks, bekerja dengan teknologi yang berbeda, dan mengelola proyek secara efektif.
+          Berikut adalah proyek pilihan yang menunjukkan kemampuan saya dalam menerapkan teknologi untuk menciptakan solusi nyata. Setiap proyek mencerminkan keahlian saya dalam problem-solving, pengembangan, dan manajemen.
         </motion.p>
       </div>
 

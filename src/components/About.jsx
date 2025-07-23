@@ -12,9 +12,9 @@ const About = () => {
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-text-secondary text-[17px] max-w-3xl leading-[30px]'
+        className='mt-4 text-text-secondary text-[17px] max-w-3xl'
       >
-        Saya adalah seorang AI Engineer dengan keahlian dalam Python, Scikit-learn, dan framework web seperti Flask dan React. Saya memiliki pengalaman dalam mengubah data kompleks menjadi model machine learning yang efisien dan solusi AI yang inovatif. Saya cepat belajar, berkolaborasi erat dengan tim untuk menciptakan aplikasi yang cerdas, dapat diskalakan, dan ramah pengguna. Mari wujudkan ide-ide Anda menjadi kenyataan!
+        Sebagai seorang AI Engineer, saya memiliki spesialisasi dalam mengubah data kompleks menjadi solusi machine learning yang cerdas dan efisien. Dengan keahlian di Python, Scikit-learn, dan React, saya berfokus pada pengembangan aplikasi yang tidak hanya inovatif tetapi juga intuitif dan mudah digunakan. Saya siap berkolaborasi untuk mewujudkan ide-ide Anda.
       </motion.p>
 
       <div className='mt-20 flex justify-center'>
