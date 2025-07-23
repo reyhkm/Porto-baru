@@ -56,4 +56,4 @@ const Projects = ({ onProjectClick }) => {
   );
 };
 
-export default SectionWrapper(Projects, "projects", "bg-background-secondary");
+export default SectionWrapper(Projects, "projects");
