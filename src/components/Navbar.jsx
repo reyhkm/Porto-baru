@@ -24,15 +24,27 @@ const Navbar = () => {
 
   const handleNavClick = (e, href, text) => {
     e.preventDefault();
-    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+    const section = document.querySelector(href);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
     setIsOpen(false);
     setActive(text);
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setActive("");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
     <header className={`fixed w-full z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto flex items-center justify-between p-4">
-        <a href="#" onClick={() => { window.scrollTo(0, 0); setActive(""); }} className="flex items-center text-2xl font-bold text-accent">
+        <a href="#" onClick={handleLogoClick} className="flex items-center text-2xl font-bold text-accent">
           <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 10 C 18 8, 25 6, 35 10 C 45 14, 48 22, 45 30 C 42 38, 35 44, 25 45 C 20 45.5, 15 44, 12 40 L 18 35" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M20 45 L 40 55" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
@@ -70,7 +82,7 @@ const Navbar = () => {
           >
             <ul className="flex flex-col p-4">
               {navLinks.map(link => (
-                <li key={link.href}>
+                <li key={link.href} className="my-1">
                   <a 
                     href={link.href} 
                     onClick={(e) => handleNavClick(e, link.href, link.text)} 
