@@ -24,16 +24,18 @@ function App() {
   };
 
   return (
-    <div className="bg-background">
-      <Navbar />
-      <main>
+    <div className="relative z-0 bg-background">
+      <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
+        <Navbar />
         <Hero />
-        <About />
-        <Projects onProjectClick={openModal} />
-        <Skills />
-        <Certifications />
+      </div>
+      <About />
+      <Projects onProjectClick={openModal} />
+      <Skills />
+      <Certifications />
+      <div className='relative z-0'>
         <Contact />
-      </main>
+      </div>
       <Footer />
       <ChatWidget />
       <ProjectModal isOpen={isModalOpen} onClose={closeModal} project={selectedProject} />

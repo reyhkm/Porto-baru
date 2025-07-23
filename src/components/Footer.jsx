@@ -11,9 +11,9 @@ const Footer = () => {
     <footer className="bg-background-secondary text-text-secondary py-8 border-t border-slate-800">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-center sm:text-left">
-          &copy; {new Date().getFullYear()} Reykal Al Hikam. Didesain & Dibangun dengan ❤️.
+          &copy; {new Date().getFullYear()} Reykal Al Hikam. All rights reserved.
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           {socialLinks.map(link => (
             <a 
               key={link.href} 
@@ -21,7 +21,7 @@ const Footer = () => {
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label={link.name}
-              className="text-2xl hover:text-accent transition-colors duration-300"
+              className="text-2xl hover:text-accent transition-transform duration-300 hover:scale-125"
             >
               <link.icon />
             </a>

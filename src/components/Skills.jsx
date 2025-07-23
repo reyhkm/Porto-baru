@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { fadeIn, textVariant } from '../utils/motion';
 import SectionWrapper from './SectionWrapper';
 import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, FaFlask } from 'react-icons/fa';
 import { SiScikitlearn, SiPandas, SiTailwindcss, SiNumpy } from 'react-icons/si';
@@ -16,32 +17,31 @@ const skillsData = [
   { icon: FaCss3Alt, name: 'CSS' },
 ];
 
-const SkillCard = ({ icon: Icon, name, index }) => (
-  <motion.div 
-    className="card flex flex-col items-center justify-center p-6 text-center hover:border-accent/50 hover:-translate-y-2"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.5 }}
-    transition={{ duration: 0.5, delay: index * 0.05 }}
+const SkillIcon = ({ icon: Icon, name, index }) => (
+  <motion.div
+    variants={fadeIn("up", "spring", index * 0.1, 0.75)}
+    className="w-24 h-24 p-4 flex flex-col items-center justify-center gap-2 glass-card"
   >
-    <Icon className="text-5xl text-accent mb-4" />
-    <p className="text-base font-medium text-text-primary">{name}</p>
+    <Icon className="text-4xl text-accent" />
+    <p className="text-sm text-text-primary text-center">{name}</p>
   </motion.div>
 );
 
 const Skills = () => {
   return (
-    <SectionWrapper id="skills">
-      <div className="container mx-auto px-4">
-        <h2 className="section-title">Keterampilan & Teknologi</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
-          {skillsData.map((skill, index) => (
-            <SkillCard key={skill.name} icon={skill.icon} name={skill.name} index={index} />
-          ))}
-        </div>
+    <>
+      <motion.div variants={textVariant()}>
+        <p className="section-subtitle">Apa yang saya kuasai</p>
+        <h2 className="section-title">Teknologi.</h2>
+      </motion.div>
+
+      <div className="mt-20 flex flex-wrap justify-center gap-8">
+        {skillsData.map((skill, index) => (
+          <SkillIcon key={skill.name} icon={skill.icon} name={skill.name} index={index} />
+        ))}
       </div>
-    </SectionWrapper>
+    </>
   );
 };
 
-export default Skills;
+export default SectionWrapper(Skills, 'skills');

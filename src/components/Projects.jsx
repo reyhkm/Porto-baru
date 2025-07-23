@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import SectionWrapper from './SectionWrapper';
+import { motion } from "framer-motion";
+import { fadeIn, textVariant } from "../utils/motion";
+import SectionWrapper from "./SectionWrapper";
 
 const projectData = {
   id: 'arum-ai',
@@ -18,44 +19,59 @@ const projectData = {
   ]
 };
 
-const Projects = ({ onProjectClick }) => {
+const ProjectCard = ({ project, onProjectClick, index }) => {
   return (
-    <SectionWrapper id="projects" className="bg-background-secondary">
-      <div className="container mx-auto px-4">
-        <h2 className="section-title">Proyek Unggulan</h2>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="group grid md:grid-cols-2 gap-8 items-center card hover:border-accent/50 cursor-pointer"
-            onClick={() => onProjectClick(projectData)}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7 }}
-            whileHover={{ y: -5 }}
-          >
-            <div className="overflow-hidden rounded-lg">
-              <img src={projectData.image} alt={projectData.title} className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" />
-            </div>
-            <div className="text-white p-4 md:p-0">
-              <h3 className="text-2xl font-bold font-serif mb-3 text-text-primary">{projectData.title}</h3>
-              <p className="text-base text-text-secondary mb-4">{projectData.description}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {projectData.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-slate-700 text-accent rounded-full text-xs font-semibold">{tag}</span>
-                ))}
-              </div>
-              <span className="text-accent font-semibold flex items-center gap-2">
-                Klik untuk detail
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </span>
-            </div>
-          </motion.div>
-        </div>
+    <motion.div 
+      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+      onClick={() => onProjectClick(project)}
+      className="glass-card w-full sm:w-[360px] cursor-pointer"
+    >
+      <div className='relative w-full h-[230px]'>
+        <img
+          src={project.image}
+          alt={project.title}
+          className='w-full h-full object-cover rounded-2xl'
+        />
       </div>
-    </SectionWrapper>
+
+      <div className='mt-5'>
+        <h3 className='text-white font-bold text-[24px]'>{project.title}</h3>
+        <p className='mt-2 text-text-secondary text-[14px]'>{project.description}</p>
+      </div>
+
+      <div className='mt-4 flex flex-wrap gap-2'>
+        {project.tags.map((tag) => (
+          <p key={tag} className={`text-[14px] text-accent`}>
+            #{tag}
+          </p>
+        ))}
+      </div>
+    </motion.div>
   );
 };
 
-export default Projects;
+const Projects = ({ onProjectClick }) => {
+  return (
+    <>
+      <motion.div variants={textVariant()}>
+        <p className="section-subtitle">Karya Saya</p>
+        <h2 className="section-title">Proyek.</h2>
+      </motion.div>
+
+      <div className='w-full flex'>
+        <motion.p
+          variants={fadeIn("", "", 0.1, 1)}
+          className='mt-3 text-text-secondary text-[17px] max-w-3xl leading-[30px]'
+        >
+          Proyek berikut menunjukkan keahlian dan pengalaman saya melalui contoh-contoh nyata dari pekerjaan saya. Setiap proyek dijelaskan secara singkat dengan tautan ke demo langsung. Ini mencerminkan kemampuan saya untuk memecahkan masalah yang kompleks, bekerja dengan teknologi yang berbeda, dan mengelola proyek secara efektif.
+        </motion.p>
+      </div>
+
+      <div className='mt-20 flex flex-wrap justify-center gap-7'>
+        <ProjectCard project={projectData} onProjectClick={onProjectClick} index={0} />
+      </div>
+    </>
+  );
+};
+
+export default SectionWrapper(Projects, "projects");
