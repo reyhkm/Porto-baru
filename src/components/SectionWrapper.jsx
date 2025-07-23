@@ -23,7 +23,7 @@ const SectionWrapper = (Component, idName, extraClasses = "") =>
         className={`relative z-0 container mx-auto py-10 md:py-16 px-4 sm:px-8 ${extraClasses}`}
       >
         <span className='hash-span' id={idName}>
-          &nbsp;
+           
         </span>
         <Component {...props} />
       </motion.section>

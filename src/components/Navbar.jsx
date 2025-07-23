@@ -42,7 +42,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-sm border-b border-white/10' : 'bg-transparent'}`}>
+    <header className={`fixed w-full z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto flex items-center justify-between p-4">
         <a href="#" onClick={handleLogoClick} className="flex items-center text-2xl font-bold text-accent">
           <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@ const Navbar = () => {
         <nav className="hidden md:flex">
           <ul className="flex items-center space-x-8 font-sans text-sm font-medium">
             {navLinks.map(link => (
-              <li key={link.href} className="relative">
+              <li key={link.href}>
                 <a 
                   href={link.href} 
                   onClick={(e) => handleNavClick(e, link.href, link.text)} 
@@ -67,9 +67,6 @@ const Navbar = () => {
                 >
                   {link.text}
                 </a>
-                {active === link.text && (
-                  <motion.div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent" layoutId="underline" />
-                )}
               </li>
             ))}
           </ul>
