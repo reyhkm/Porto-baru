@@ -33,9 +33,7 @@ function App() {
       <Projects onProjectClick={openModal} />
       <Skills />
       <Certifications />
-      <div className='relative z-0'>
-        <Contact />
-      </div>
+      <Contact />
       <Footer />
       <ChatWidget />
       <ProjectModal isOpen={isModalOpen} onClose={closeModal} project={selectedProject} />
