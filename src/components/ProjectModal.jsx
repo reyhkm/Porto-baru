@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
 
 const ProjectModal = ({ isOpen, onClose, project }) => {
   const [isImageExpanded, setIsImageExpanded] = useState(false);
+
+  useEffect(() => {
+    // Reset image expansion state when modal is opened
+    if (isOpen) {
+      setIsImageExpanded(false);
+    }
+  }, [isOpen]);
 
   if (!isOpen || !project) return null;
 
@@ -63,7 +70,7 @@ const ProjectModal = ({ isOpen, onClose, project }) => {
                     <img 
                       src={project.detailImage} 
                       alt={`${project.title} screenshot`} 
-                      className={`w-full h-auto object-cover object-top transition-transform duration-500 ${isImageExpanded ? 'scale-100' : 'scale-120'}`}
+                      className={`w-full h-auto object-cover object-top transition-transform duration-500 ${isImageExpanded ? 'scale-120' : 'scale-100'}`} 
                     />
                   </motion.div>
                   <p className="text-center text-accent text-sm mt-2">
